@@ -28,13 +28,13 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #7bed9f;
+    background-color: #ea740d;;
 }
 .gameArea{
     width: 50%;
     height: 400px;
     padding: 20px 0;
-    background-color: #2ed573;
+    background-color: #b6d52e;
     display: flex;
     justify-content: center;
     align-items: center ;
