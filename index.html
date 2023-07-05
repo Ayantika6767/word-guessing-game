@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the word</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="script.js">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Source+Sans+3:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header><h1>Word guessing game</h1></header>
+    <section>
+        <div class="gameArea">
+            <h3 class="msg"></h3>
+            <input type="text" class="hidden">
+            <br>
+            <button class="btn">Click here to start</button>
+        </div>
+    </section>
+
+<script>
+const msg = document.querySelector('.msg');
+const guess = document.querySelector('input');
+const btn = document.querySelector('.btn');
+let play =  false;
+
+let nw="";
+let randomWords="";
+let quiz =['python','javascript','java','c-sharp','html','reactjs','angular','swift','android','sql'];
+
+
+const newwords=()=>{
+    let rand= Math.floor(Math.random()*quiz.length);
+    //console.log(rand);
+    let newtemp=quiz[rand];
+    //console.log(newtemp.split(""));
+    return newtemp;
+    //console.log(quiz[i]);
+}
+
+const scamble=(arr)=>{
+    for(let i=arr.length-1; i>=0;i--){
+        let temp=arr[i];
+        //console.log(temp);
+        let j= Math.floor(Math.random()*(i+1));
+        //console.log(i);
+        //console.log(j);
+
+        arr[i]=arr[j];
+        arr[j]=temp;
+
+    }
+    return arr;
+}
+btn.addEventListener('click',function(){
+    if(!play){
+        play=true;
+        btn.innerHTML="Guess";
+        guess.classList.toggle('hidden');
+        nw=newwords();
+        randomWords=scamble(nw.split("")).join("");
+        //console.log(randomWords);
+        msg.innerHTML=`Guess the word : ${randomWords}`;
+    }
+    else{
+        let user = guess.value;
+        if(nw===user){
+            //console.log("correct");
+            play=false;
+            msg.innerHTML=`Correct guess. The word is : ${nw}`;
+            btn.innerHTML="Start Again";
+            guess.classList.toggle('hidden');
+            guess.value="";
+        }else{
+            console.log("incorrect");
+            msg.innerHTML=`In-Correct guess. Try again to guess: ${randomWords}`;
+        }
+    }
+})
+    </script>
+</body>
+</html>
